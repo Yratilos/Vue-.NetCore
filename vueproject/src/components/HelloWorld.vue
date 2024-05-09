@@ -6,15 +6,14 @@
         <div v-if="loading" class="loading">
             Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationvue">https://aka.ms/jspsintegrationvue</a> for more details.
         </div>
-
         <div v-if="post" class="content">
             <table>
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Temp. (C)</th>
-                        <th>Temp. (F)</th>
-                        <th>Summary</th>
+                        <th>{{$t('Date')}}</th>
+                        <th>{{$t('Temp.')}} (C)</th>
+                        <th>{{$t('Temp.')}} (F)</th>
+                        <th>{{$t('Summary')}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +26,10 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div>
+        <button @click="switchLocale('en')">English</button>
+        <button @click="switchLocale('zh')">中文</button>
     </div>
 </template>
 
@@ -61,34 +64,38 @@
                         this.loading = false;
                         return;
                     });
+            },
+            switchLocale(newLocale) {
+                this.$i18n.locale = newLocale;
             }
         },
     });
 </script>
 
 <style scoped>
-th {
-    font-weight: bold;
-}
-tr:nth-child(even) {
-    background: #F2F2F2;
-}
+    th {
+        font-weight: bold;
+    }
 
-tr:nth-child(odd) {
-    background: #FFF;
-}
+    tr:nth-child(even) {
+        background: #F2F2F2;
+    }
 
-th, td {
-    padding-left: .5rem;
-    padding-right: .5rem;
-}
+    tr:nth-child(odd) {
+        background: #FFF;
+    }
 
-.weather-component {
-    text-align: center;
-}
+    th, td {
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
 
-table {
-    margin-left: auto;
-    margin-right: auto;
-}
+    .weather-component {
+        text-align: center;
+    }
+
+    table {
+        margin-left: auto;
+        margin-right: auto;
+    }
 </style>

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTests", "WebApiTests\WebApiTests.csproj", "{CBC09420-FC6E-4C4E-93A0-086DD2CCB1C9}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "vueproject", "vueproject\vueproject.esproj", "{21D83AD3-CFAF-4ECD-A4C5-F7B6E0EA3949}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "vueproject", "vueproject\vueproject.esproj", "{79F96E89-C641-44CF-A398-DA062D9DD953}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +23,12 @@ Global
 		{CBC09420-FC6E-4C4E-93A0-086DD2CCB1C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBC09420-FC6E-4C4E-93A0-086DD2CCB1C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBC09420-FC6E-4C4E-93A0-086DD2CCB1C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{21D83AD3-CFAF-4ECD-A4C5-F7B6E0EA3949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{21D83AD3-CFAF-4ECD-A4C5-F7B6E0EA3949}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{21D83AD3-CFAF-4ECD-A4C5-F7B6E0EA3949}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{21D83AD3-CFAF-4ECD-A4C5-F7B6E0EA3949}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{21D83AD3-CFAF-4ECD-A4C5-F7B6E0EA3949}.Release|Any CPU.Build.0 = Release|Any CPU
-		{21D83AD3-CFAF-4ECD-A4C5-F7B6E0EA3949}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{79F96E89-C641-44CF-A398-DA062D9DD953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79F96E89-C641-44CF-A398-DA062D9DD953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79F96E89-C641-44CF-A398-DA062D9DD953}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{79F96E89-C641-44CF-A398-DA062D9DD953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79F96E89-C641-44CF-A398-DA062D9DD953}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79F96E89-C641-44CF-A398-DA062D9DD953}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
