@@ -9,6 +9,6 @@
         /// <summary>
         /// 内容
         /// </summary>
-        public string Content {  get; set; }
+        public string Content { get; set; }
     }
 }

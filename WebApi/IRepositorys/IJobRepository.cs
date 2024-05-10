@@ -1,5 +1,4 @@
-﻿using System;
-using WebApi.Models;
+﻿using WebApi.Models;
 
 namespace WebApi.IRepositorys
 {

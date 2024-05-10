@@ -253,7 +253,7 @@ namespace WebApi.Systems.Extensions
         /// <returns></returns>
         public static DateTime ToDateTime<T>(this T text)
         {
-            if (typeof(T).Equals(typeof(string))&&text.ToString()== "now()")
+            if (typeof(T).Equals(typeof(string)) && text.ToString() == "now()")
             {
                 return DateTime.Now;
             }

@@ -1,11 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WebApi.Services;
-using WebApi.IServices;
-using WebApi.Utils;
+﻿using WebApi.Dtos;
 using WebApi.IRepositorys;
+using WebApi.IServices;
 using WebApiTests;
-using WebApi.Models;
-using WebApi.Dtos;
 
 namespace WebApi.Services.Tests
 {
@@ -43,7 +39,7 @@ namespace WebApi.Services.Tests
         [TestMethod()]
         public void LogTest(string content, string model)
         {
-            var j=jobService.Log(new JobDto() { Content = content, Model = model });
+            var j = jobService.Log(new JobDto() { Content = content, Model = model });
             var d = jobRepository.Delete(j);
             Assert.AreEqual(d.Content, content);
             Assert.AreEqual(d.Model, model);
@@ -51,9 +47,9 @@ namespace WebApi.Services.Tests
 
         [DataRow("内容", "模块")]
         [TestMethod()]
-        public void ShareTest(string content,string model)
+        public void ShareTest(string content, string model)
         {
-            var j=jobService.Share(new JobDto() { Content= content,Model=model});
+            var j = jobService.Share(new JobDto() { Content = content, Model = model });
             var d = jobRepository.Delete(j);
             Assert.AreEqual(d.Content, content);
             Assert.AreEqual(d.Model, model);

@@ -1,9 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WebApi.Services;
-using WebApi.IRepositorys;
+﻿using WebApi.IRepositorys;
 using WebApi.IServices;
-using WebApiTests;
 using WebApi.Models;
+using WebApiTests;
 
 namespace WebApi.Services.Tests
 {
@@ -68,7 +66,7 @@ namespace WebApi.Services.Tests
         [TestMethod()]
         public void AddTest()
         {
-            var data = UserService.Add(new User() { ID=Guid.NewGuid() });
+            var data = UserService.Add(new User() { ID = Guid.NewGuid() });
             Assert.IsNotNull(data);
         }
     }

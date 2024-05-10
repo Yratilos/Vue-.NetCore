@@ -16,7 +16,7 @@ namespace WebApi.Services
 
         public User Add(User user)
         {
-            var data=userRepository.Add(user);
+            var data = userRepository.Add(user);
             return data;
         }
 

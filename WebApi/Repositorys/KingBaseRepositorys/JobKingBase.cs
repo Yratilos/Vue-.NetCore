@@ -41,7 +41,7 @@ namespace WebApi.Repositorys.KingBaseRepositorys
 
         public Job Delete(Job job)
         {
-            var j= GetById(job);
+            var j = GetById(job);
             IDataParameter[] parameters = new KdbndpParameter[]{
                     new KdbndpParameter("id",job.ID)
                 };

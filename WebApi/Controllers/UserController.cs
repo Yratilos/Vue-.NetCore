@@ -6,7 +6,6 @@ using WebApi.IServices;
 using WebApi.IUtils;
 using WebApi.Models;
 using WebApi.Systems.Extensions;
-using WebApi.Systems.Results;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -29,7 +28,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public User Add([FromBody] User user)
         {
-            var data=userService.Add(user);
+            var data = userService.Add(user);
             return data;
         }
 

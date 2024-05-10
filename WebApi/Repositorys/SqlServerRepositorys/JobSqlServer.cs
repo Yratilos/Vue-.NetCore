@@ -42,7 +42,7 @@ namespace WebApi.Repositorys.SqlServerRepositorys
 
         public Job Delete(Job job)
         {
-            var j= GetById(job);
+            var j = GetById(job);
             IDataParameter[] parameters = new SqlParameter[]{
                 new SqlParameter("@id",job.ID)
             };

@@ -23,7 +23,7 @@ namespace WebApi.Repositorys.SqlServerRepositorys
         public User Add(User u)
         {
             var user = GetById(u);
-            if (user.ID == Guid.Empty&&u.ID!=Guid.Empty)
+            if (user.ID == Guid.Empty && u.ID != Guid.Empty)
             {
                 IDataParameter[] parameters = new KdbndpParameter[]{
                     new KdbndpParameter("CreateTime",u.CreateTime),

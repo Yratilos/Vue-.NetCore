@@ -2,7 +2,6 @@
 using WebApi.Dtos;
 using WebApi.IRepositorys;
 using WebApi.IServices;
-using WebApi.IUtils;
 using WebApi.Models;
 
 namespace WebApi.Services
@@ -27,8 +26,8 @@ namespace WebApi.Services
 
         Job Add(JobDto j, LogType type)
         {
-            return jobRepository.Add(new Job() {ID=Guid.NewGuid(),LogType=type.ToString(),Content=j.Content,Model=j.Model });
+            return jobRepository.Add(new Job() { ID = Guid.NewGuid(), LogType = type.ToString(), Content = j.Content, Model = j.Model });
         }
-        
+
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Kdbndp;
-using NPOI.POIFS.Crypt.Dsig;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace WebApi.Repositorys.KingBaseRepositorys
         public User Add(User u)
         {
             var user = GetById(u);
-            if(user.ID==Guid.Empty&&u.ID!=Guid.Empty)
+            if (user.ID == Guid.Empty && u.ID != Guid.Empty)
             {
                 IDataParameter[] parameters = new KdbndpParameter[]{
                     new KdbndpParameter("CreateTime",u.CreateTime),
