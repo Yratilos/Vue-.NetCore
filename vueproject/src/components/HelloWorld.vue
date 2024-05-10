@@ -57,13 +57,17 @@
                 this.post = null;
                 this.loading = true;
 
-                fetch('weatherforecast')
-                    .then(r => r.json())
-                    .then(json => {
-                        this.post = json.data;
-                        this.loading = false;
-                        return;
-                    });
+                this.axios.get('weatherforecast').then(data => {
+                    this.post = data;
+                    this.loading = false;
+                })
+                //fetch('weatherforecast')
+                //    .then(r => r.json())
+                //    .then(json => {
+                //        this.post = json.data;
+                //        this.loading = false;
+                //        return;
+                //    });
             },
             switchLocale(newLocale) {
                 this.$i18n.locale = newLocale;
