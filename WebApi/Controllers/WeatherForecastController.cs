@@ -1,27 +1,34 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebApi.Dtos;
 
-namespace VueApp.Server.Controllers
+namespace WebApi.Controllers
 {
     [ApiController]
     [AllowAnonymous]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        string[] Summaries 
+        { 
+            get
+            {
+                return new[]
+                {
+                    _localizer["Freezing"].ToString(), _localizer["Bracing"], _localizer["Chilly"], _localizer["Cool"], _localizer["Mild"],_localizer["Warm"], _localizer["Balmy"], _localizer["Hot"], _localizer["Sweltering"], _localizer["Scorching"]
+                };
+            } 
+        } 
+        IStringLocalizer<WeatherForecastController> _localizer;
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(IStringLocalizer<WeatherForecastController> localizer)
         {
-            _logger = logger;
+            _localizer = localizer;
         }
 
         [HttpGet]

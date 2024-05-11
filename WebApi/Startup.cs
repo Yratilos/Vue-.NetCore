@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -81,6 +83,8 @@ namespace WebApi
                     c.AddSecurityRequirement(securityRequirement);
                 }
             });
+
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
 
             var dataBase = Configuration["DataBase"];
             services.AddSingleton(DataBaseFactory.CreateDataBase(dataBase, Configuration["ConnectionStrings:" + dataBase]));
@@ -191,6 +195,18 @@ namespace WebApi
                 });
                 app.UseStaticFiles();
             }
+
+            var supportedCultures = new[]
+            {
+                new CultureInfo("en-US"),
+                new CultureInfo("zh-CN"),
+            };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("zh-CN"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             app.UseHttpsRedirection();
 

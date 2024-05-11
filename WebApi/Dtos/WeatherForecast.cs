@@ -1,6 +1,6 @@
 using System;
 
-namespace VueApp.Server
+namespace WebApi.Dtos
 {
     public class WeatherForecast
     {

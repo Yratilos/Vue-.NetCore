@@ -10,10 +10,16 @@ const messages = {
     en: enLocale,
     zh: zhLocale
 }
-
+let locale;
+const cookie = document.cookie
+if (cookie === '.AspNetCore.Culture=c=en-US|uic=en-US') {
+    locale = 'en'
+} else {
+    locale = 'zh'
+}
 const i18n = createI18n({
     legacy: false,
-    locale: 'en',
+    locale: locale,
     messages
 })
 
@@ -38,7 +44,6 @@ axios.interceptors.response.use(function (response) {
     }
     return Promise.reject(error);
 }, function (error) {
-    console.log(error)
     // 超出 2xx 范围的状态码都会触发该函数。
     // 对响应错误做点什么
     return Promise.reject(error);

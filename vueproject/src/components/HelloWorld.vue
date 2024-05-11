@@ -1,6 +1,6 @@
 <template>
     <div class="weather-component">
-        <h1>Weather forecast</h1>
+        <h1>{{$t('Weather forecast')}}</h1>
         <p>This component demonstrates fetching data from the server.</p>
 
         <div v-if="loading" class="loading">
@@ -71,6 +71,12 @@
             },
             switchLocale(newLocale) {
                 this.$i18n.locale = newLocale;
+                if(newLocale==='en'){
+                    document.cookie ='.AspNetCore.Culture=c=en-US|uic=en-US'
+                }else{
+                    document.cookie ='.AspNetCore.Culture=c=zh-CN|uic=zh-CN'
+                }
+                this.fetchData();
             }
         },
     });
