@@ -16,15 +16,15 @@ namespace WebApi.Services
 
         public Job Log(JobDto j)
         {
-            return Add(j, LogType.Log);
+            return Add(j, jobLogType.Log);
         }
 
         public Job Share(JobDto j)
         {
-            return Add(j, LogType.Share);
+            return Add(j, jobLogType.Share);
         }
 
-        Job Add(JobDto j, LogType type)
+        Job Add(JobDto j, jobLogType type)
         {
             return jobRepository.Add(new Job() { ID = Guid.NewGuid(), LogType = type.ToString(), Content = j.Content, Model = j.Model });
         }

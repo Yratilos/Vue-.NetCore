@@ -1,6 +1,6 @@
 ﻿namespace WebApi.Models
 {
-    public enum LogType
+    public enum jobLogType
     {
         /// <summary>
         /// 日志
