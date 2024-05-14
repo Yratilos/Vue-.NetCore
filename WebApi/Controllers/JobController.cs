@@ -7,7 +7,7 @@ using WebApi.IServices;
 
 namespace WebApi.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     [AllowAnonymous]
     public class JobController : ControllerBase

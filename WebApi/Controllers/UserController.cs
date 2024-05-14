@@ -11,7 +11,7 @@ using WebApi.Systems.Extensions;
 
 namespace WebApi.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     [AllowAnonymous]
     //[Authorize]
