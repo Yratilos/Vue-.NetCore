@@ -41,39 +41,51 @@
         data() {
             return {
                 loading: false,
-                post: null
+                post: null,
+                locale:'zh',
             };
         },
         created() {
             // fetch the data when the view is created and the data is
             // already being observed
-            this.fetchData();
+            this.axiosData();
         },
         watch: {
             // call again the method if the route changes
-            '$route': 'fetchData'
+            '$route': 'axiosData',
+            locale: function (val) {
+                setLanguage(val)
+                this.$i18n.locale = val
+                this.axiosData()
+            }
         },
         methods: {
             fetchData() {
                 this.post = null;
                 this.loading = true;
 
+                fetch('weatherforecast')
+                    .then(r => r.json())
+                    .then(json => {
+                        this.post = json.data;
+                        this.loading = false;
+                        return;
+                    });
+            },
+            axiosData() {
+                const timer = setTimeout(() => {
+                    this.post = null;
+                    this.loading = true;
+                }, 500)
+
                 this.axios.get('weatherforecast').then(data => {
                     this.post = data;
+                    clearTimeout(timer);
                     this.loading = false;
                 })
-                //fetch('weatherforecast')
-                //    .then(r => r.json())
-                //    .then(json => {
-                //        this.post = json.data;
-                //        this.loading = false;
-                //        return;
-                //    });
             },
             switchLocale(newLocale) {
-                setLanguage(newLocale)
-                this.$i18n.locale = newLocale;
-                this.fetchData()
+                this.locale = newLocale
             }
         },
     });
