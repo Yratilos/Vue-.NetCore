@@ -35,6 +35,7 @@
 
 <script lang="js">
     import { defineComponent } from 'vue';
+    import { setLanguage } from '../utils/cookieManager'
 
     export default defineComponent({
         data() {
@@ -70,13 +71,9 @@
                 //    });
             },
             switchLocale(newLocale) {
+                setLanguage(newLocale)
                 this.$i18n.locale = newLocale;
-                if(newLocale==='en'){
-                    document.cookie ='.AspNetCore.Culture=c=en-US|uic=en-US'
-                }else{
-                    document.cookie ='.AspNetCore.Culture=c=zh-CN|uic=zh-CN'
-                }
-                this.fetchData();
+                this.fetchData()
             }
         },
     });
