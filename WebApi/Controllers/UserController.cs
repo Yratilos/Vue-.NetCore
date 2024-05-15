@@ -13,7 +13,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [AllowAnonymous]
+    //[AllowAnonymous]
     //[Authorize]
     public class UserController : Page
     {

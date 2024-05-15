@@ -35,7 +35,7 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var urls = Configuration["urls"].TrimEnd(';').Split(';')
+            var urls = Configuration["Cors"].TrimEnd(';').Split(';')
                                  .Where(url => url.StartsWith("http:", StringComparison.OrdinalIgnoreCase))
                                  .ToArray();
 
