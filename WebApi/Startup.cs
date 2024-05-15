@@ -35,6 +35,20 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var urls = Configuration["urls"].TrimEnd(';').Split(';')
+                                 .Where(url => url.StartsWith("http:", StringComparison.OrdinalIgnoreCase))
+                                 .ToArray();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin", builder =>
+                {
+                    builder.WithOrigins(urls)
+                           .AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowCredentials();
+                });
+            });
             services.AddControllers(options =>
             {
                 options.Filters.Add<AuthorizationFilter>();
@@ -208,9 +222,11 @@ namespace WebApi
                 SupportedUICultures = supportedCultures
             });
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
+
+            app.UseCors("AllowSpecificOrigin");
+
+            app.UseHttpsRedirection();
 
             app.UseAuthentication();
 
