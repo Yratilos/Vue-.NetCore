@@ -25,17 +25,17 @@ namespace WebApi.Repositorys.SqlServerRepositorys
             var user = GetById(u);
             if (user.ID == Guid.Empty && u.ID != Guid.Empty)
             {
-                IDataParameter[] parameters = new KdbndpParameter[]{
-                    new KdbndpParameter("CreateTime",u.CreateTime),
-                    new KdbndpParameter("UpdateTime",u.UpdateTime),
-                    new KdbndpParameter("ID",u.ID),
-                    new KdbndpParameter("Name",u.Name),
-                    new KdbndpParameter("Account",u.Account),
-                    new KdbndpParameter("Password",u.Password)
+                IDataParameter[] parameters = new SqlParameter[]{
+                    new SqlParameter("@CreateTime",u.CreateTime),
+                    new SqlParameter("@UpdateTime",u.UpdateTime),
+                    new SqlParameter("@ID",u.ID),
+                    new SqlParameter("@Name",u.Name),
+                    new SqlParameter("@Account",u.Account),
+                    new SqlParameter("@Password",u.Password)
                 };
                 Hashtable hashtable = new Hashtable()
                 {
-                    {"insert into [dbo].[User] (CreateTime,UpdateTime,ID,Name,Account,Password)values(:CreateTime,:UpdateTime,:ID,:Name,:Account,:Password)", parameters}
+                    {"insert into [dbo].[User] (CreateTime,UpdateTime,ID,Name,Account,Password)values(@CreateTime,@UpdateTime,@ID,@Name,@Account,@Password)", parameters}
                 };
                 db.ExecuteTrans(hashtable);
                 return u;
