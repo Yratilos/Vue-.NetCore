@@ -143,9 +143,9 @@ namespace WebApi.Systems.DataBases
                         foreach (DictionaryEntry item in hashtable)
                         {
                             cmd.CommandText = item.Key.ToString();
-                            if (item.Value is SqlParameter[])
+                            if (item.Value is IDataParameter[])
                             {
-                                cmd.Parameters.AddRange(item.Value as SqlParameter[]);
+                                cmd.Parameters.AddRange(item.Value as IDataParameter[]);
                             }
                             cmd.Transaction = trans;
                             var c = cmd.ExecuteNonQuery();

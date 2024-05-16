@@ -1,7 +1,9 @@
 ﻿using Kdbndp;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using WebApi.IRepositorys;
 using WebApi.Models;
 using WebApi.Systems.DataBases;
@@ -21,17 +23,17 @@ namespace WebApi.Repositorys.KingBaseRepositorys
             var job = GetById(j);
             if (job.ID == Guid.Empty && j.ID != Guid.Empty)
             {
-                IDataParameter[] parameters = new KdbndpParameter[]{
-                    new KdbndpParameter("CreateTime",j.CreateTime),
-                    new KdbndpParameter("UpdateTime",j.UpdateTime),
-                    new KdbndpParameter("ID",j.ID),
-                    new KdbndpParameter("LogType",j.LogType),
-                    new KdbndpParameter("Content",j.Content),
-                    new KdbndpParameter("Model",j.Model),
-                };
+                var dic = j.ToDictionary();
+                List<IDataParameter> parametersList = new List<IDataParameter>();
+                foreach (var v in dic)
+                {
+                    parametersList.Add(new KdbndpParameter(v.Key, v.Value));
+                }
+                IDataParameter[] parameters = parametersList.ToArray();
+                var sql = $"insert into \"public\".\"Job\" ({string.Join(",", dic.Keys)})values({string.Join(",", dic.Keys.Select(s=>$":{s}"))})";
                 Hashtable hashtable = new Hashtable()
                 {
-                    {"insert into \"public\".\"Job\" (CreateTime,UpdateTime,ID,LogType,Content,Model)values(:CreateTime,:UpdateTime,:ID,:LogType,:Content,:Model)", parameters}
+                    {sql, parameters}
                 };
                 db.ExecuteTrans(hashtable);
                 return j;

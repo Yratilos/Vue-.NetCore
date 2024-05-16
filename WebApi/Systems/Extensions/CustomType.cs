@@ -4,11 +4,25 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Reflection;
+using WebApi.Models;
 
 namespace WebApi.Systems.Extensions
 {
     static class CustomType
     {
+        public static Dictionary<string,object> ToDictionary<T>(this T model) where T : class, new()
+        {
+            var dic = new Dictionary<string, object>();
+            PropertyInfo[] properties = typeof(T).GetProperties();
+            foreach (var prop in properties)
+            {
+                object value = prop.GetValue(model);
+                dic.Add(prop.Name, value);
+            }
+            return dic;
+        }
+
         /// <summary>
         /// 获取枚举Description属性
         /// </summary>
