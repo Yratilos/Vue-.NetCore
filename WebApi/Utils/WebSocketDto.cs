@@ -15,7 +15,7 @@ namespace WebApi.Utils
         public string Message { get; set; }
         public override string ToString()
         {
-            return $"{CreateTime} - Message: {Message},IP: {ClientIP}, Port: {ClientPort}";
+            return $"Message: {Message}, IP: {ClientIP}, Port: {ClientPort}";
         }
     }
 }

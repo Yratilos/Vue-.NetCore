@@ -22,7 +22,7 @@ namespace WebApi.Utils
         public string DataBase { get; set; }
         public override string ToString()
         {
-            return $"{CreateTime}({DataBase}) - Request Method: {RequestMethod},Request Path: {RequestPath}, Parameters: {JsonConvert.SerializeObject(RequestParams)},Result: {JsonConvert.SerializeObject(Result)}, Time taken: {Time.TotalMilliseconds} ms,IP: {ClientIP}, Port: {ClientPort}";
+            return $"Request Method: {RequestMethod}, Request Path: {RequestPath}, Parameters: {JsonConvert.SerializeObject(RequestParams)}, Result: {JsonConvert.SerializeObject(Result)}, Time taken: {Time.TotalMilliseconds} ms, DataBase:{DataBase}, IP: {ClientIP}, Port: {ClientPort}";
         }
     }
 }
