@@ -30,7 +30,7 @@ namespace WebApi.Repositorys.KingBaseRepositorys
                     parametersList.Add(new KdbndpParameter(v.Key, v.Value));
                 }
                 IDataParameter[] parameters = parametersList.ToArray();
-                var sql = $"insert into \"public\".\"Job\" ({string.Join(",", dic.Keys)})values({string.Join(",", dic.Keys.Select(s=>$":{s}"))})";
+                var sql = $"insert into \"public\".\"Job\" ({string.Join(",", dic.Keys)})values({string.Join(",", dic.Keys.Select(s => $":{s}"))})";
                 Hashtable hashtable = new Hashtable()
                 {
                     {sql, parameters}

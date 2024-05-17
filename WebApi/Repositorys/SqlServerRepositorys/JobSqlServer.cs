@@ -1,5 +1,4 @@
-﻿using Kdbndp;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,7 +27,7 @@ namespace WebApi.Repositorys.SqlServerRepositorys
                 List<IDataParameter> parametersList = new List<IDataParameter>();
                 foreach (var v in dic)
                 {
-                    parametersList.Add(new SqlParameter("@"+v.Key, v.Value));
+                    parametersList.Add(new SqlParameter("@" + v.Key, v.Value));
                 }
                 IDataParameter[] parameters = parametersList.ToArray();
                 var sql = $"insert into [dbo].[Job] ({string.Join(",", dic.Keys)})values({string.Join(",", dic.Keys.Select(s => $"@{s}"))})";

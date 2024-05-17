@@ -56,7 +56,7 @@ namespace WebApi.Utils
         [Obsolete]
         public void Share(string message)
         {
-            Write(message,LogSharePath);
+            Write(message, LogSharePath);
         }
     }
 }

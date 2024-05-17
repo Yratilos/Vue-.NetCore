@@ -13,16 +13,16 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        string[] Summaries 
-        { 
+        string[] Summaries
+        {
             get
             {
                 return new[]
                 {
                     _localizer["Freezing"].ToString(), _localizer["Bracing"], _localizer["Chilly"], _localizer["Cool"], _localizer["Mild"],_localizer["Warm"], _localizer["Balmy"], _localizer["Hot"], _localizer["Sweltering"], _localizer["Scorching"]
                 };
-            } 
-        } 
+            }
+        }
         IStringLocalizer<WeatherForecastController> _localizer;
 
         public WeatherForecastController(IStringLocalizer<WeatherForecastController> localizer)
