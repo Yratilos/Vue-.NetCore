@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.IO;
 using WebApi.IUtils;
+using WebApi.Systems.Extensions;
 
 namespace WebApi.Utils
 {
@@ -12,46 +14,49 @@ namespace WebApi.Utils
         private static readonly string LogJobPath = "LogJob.txt";
         private static readonly string LogSharePath = "LogShare.txt";
 
-        [Obsolete]
-        public void Job(string message)
+        IConfiguration Configuration;
+        public Logger(IConfiguration configuration)
         {
-            using (StreamWriter writer = File.AppendText(LogJobPath))
+            Configuration = configuration;
+        }
+
+        void Write(string message, string path)
+        {
+            if (!Configuration["Logger"].ToBoolean())
+            {
+                return;
+            }
+            using (StreamWriter writer = File.AppendText(path))
             {
                 writer.WriteLine($"{DateTime.Now} - {message}");
             }
+        }
+
+        [Obsolete]
+        public void Job(string message)
+        {
+            Write(message, LogJobPath);
         }
 
         public void WebSocket<T>(T model)
         {
-            using (StreamWriter writer = File.AppendText(LogWebSocketPath))
-            {
-                writer.WriteLine(model.ToString());
-            }
+            Write(model.ToString(), LogWebSocketPath);
         }
 
         public void Info<T>(T model)
         {
-            using (StreamWriter writer = File.AppendText(LogInfoPath))
-            {
-                writer.WriteLine(model.ToString());
-            }
+            Write(model.ToString(), LogInfoPath);
         }
 
         public void Error(Exception message)
         {
-            using (StreamWriter writer = File.AppendText(LogErrorPath))
-            {
-                writer.WriteLine($"{DateTime.Now} - {message}");
-            }
+            Write(message.ToString(), LogErrorPath);
         }
 
         [Obsolete]
         public void Share(string message)
         {
-            using (StreamWriter writer = File.AppendText(LogSharePath))
-            {
-                writer.WriteLine($"{DateTime.Now} - {message}");
-            }
+            Write(message,LogSharePath);
         }
     }
 }
