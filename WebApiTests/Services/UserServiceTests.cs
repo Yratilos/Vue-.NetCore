@@ -63,11 +63,15 @@ namespace WebApi.Services.Tests
             Assert.IsNotNull(data);
         }
 
+        [DataRow("2056ee13-aa02-ef11-9c2c-5a44875600c1")]
         [TestMethod()]
-        public void AddTest()
+        public void AddTest(string _id)
         {
-            var data = UserService.Add(new User() { ID = Guid.NewGuid() });
-            Assert.IsNotNull(data);
+            var id = new Guid(_id);
+            var u = UserService.Add(new User() { ID = id });
+            var d = UserService.Delete(id, out bool b);
+            Assert.AreEqual(u.ID, id);
+            Assert.AreEqual(d.ID, id);
         }
     }
 }
