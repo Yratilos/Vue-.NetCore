@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using WebApi.Systems.Extensions;
+using WebApi.Systems.Results;
 
 namespace WebApi.Utils
 {
@@ -18,7 +20,8 @@ namespace WebApi.Utils
         public IDictionary<string, object> RequestParams { get; set; }
         public TimeSpan Time { get; set; }
         public string RequestMethod { get; set; }
-        public object Result { get; set; }
+        object _result;
+        public object Result { get { return _result is null ? CustomStatus.Error.GetDescription() : _result; } set { Result = value; } }
         public string DataBase { get; set; }
         public override string ToString()
         {
