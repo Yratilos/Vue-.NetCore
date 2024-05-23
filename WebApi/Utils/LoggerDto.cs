@@ -21,7 +21,7 @@ namespace WebApi.Utils
         public TimeSpan Time { get; set; }
         public string RequestMethod { get; set; }
         object _result;
-        public object Result { get { return _result is null ? CustomStatus.Error.GetDescription() : _result; } set { Result = value; } }
+        public object Result { get { return _result is null ? CustomStatus.Error.GetDescription() : _result; } set { _result = value; } }
         public string DataBase { get; set; }
         public override string ToString()
         {
