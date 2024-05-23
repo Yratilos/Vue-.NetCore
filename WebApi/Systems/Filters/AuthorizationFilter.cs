@@ -25,21 +25,35 @@ namespace WebApi.Systems.Filters
             if (Configuration["Jwt:Enabled"].ToBoolean() && !IsAllowAnonymous(context))
             {
                 string token = context.HttpContext.Request.Headers["Authorization"];
-                if (!jwtService.IsValidToken(token, out string msg))
+                if (jwtService.IsValidToken(token, out string msg))
                 {
-                    var rspResult = new CustomResponse<object>() { Status = CustomStatus.Error, Message = msg };
-                    context.Result = new InternalServerObjectResult(rspResult, 401);
-                    logger.Info(new LoggerDto()
+                    var id = context.HttpContext.User.Claims.Single(c => c.Type == "ID").Value;
+                    msg = "No access";
+                    if (id != "08d3fa5a-9ae6-ee11-9c29-5a44875600c1")
                     {
-                        RequestPath = context.HttpContext.Request.Path,
-                        RequestMethod = context.HttpContext.Request.Method,
-                        ClientIP = context.HttpContext.Connection.RemoteIpAddress,
-                        ClientPort = context.HttpContext.Connection.RemotePort,
-                        Result = msg,
-                        DataBase = Configuration["DataBase"]
-                    });
+                        ReturnStatusCode(context, msg, 403);
+                    }
+                }
+                else
+                {
+                    ReturnStatusCode(context, msg, 401);
                 }
             }
+        }
+
+        private void ReturnStatusCode(AuthorizationFilterContext context, string msg, int statusCode)
+        {
+            var rspResult = new CustomResponse<object>() { Status = CustomStatus.Error, Message = msg };
+            context.Result = new InternalServerObjectResult(rspResult, statusCode);
+            logger.Info(new LoggerDto()
+            {
+                RequestPath = context.HttpContext.Request.Path,
+                RequestMethod = context.HttpContext.Request.Method,
+                ClientIP = context.HttpContext.Connection.RemoteIpAddress,
+                ClientPort = context.HttpContext.Connection.RemotePort,
+                Result = msg,
+                DataBase = Configuration["DataBase"]
+            });
         }
 
         private bool IsAllowAnonymous(AuthorizationFilterContext context)
