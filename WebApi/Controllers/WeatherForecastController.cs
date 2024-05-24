@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebApi.Dtos;
+using WebApi.Resources;
 
 namespace WebApi.Controllers
 {
@@ -19,22 +20,22 @@ namespace WebApi.Controllers
             {
                 return new[]
                 {
-                    _localizer["Freezing"].ToString(), _localizer["Bracing"], _localizer["Chilly"], _localizer["Cool"], _localizer["Mild"],_localizer["Warm"], _localizer["Balmy"], _localizer["Hot"], _localizer["Sweltering"], _localizer["Scorching"]
+                    resources.Freezing, resources.Bracing, resources.Chilly, resources.Cool, resources.Mild,resources.Warm, resources.Balmy, resources.Hot, resources.Sweltering, resources.Scorching
                 };
             }
         }
-        IStringLocalizer<WeatherForecastController> _localizer;
+        WeatherForecastResources resources;
 
         public WeatherForecastController(IStringLocalizer<WeatherForecastController> localizer)
         {
-            _localizer = localizer;
+            resources = new WeatherForecastResources(localizer);
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<WeatherForecastDto> Get()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecastDto
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
