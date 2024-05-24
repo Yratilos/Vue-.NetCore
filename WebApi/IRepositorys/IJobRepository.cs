@@ -1,4 +1,5 @@
-﻿using WebApi.Models;
+﻿using System.Collections.Generic;
+using WebApi.Models;
 
 namespace WebApi.IRepositorys
 {
@@ -6,5 +7,6 @@ namespace WebApi.IRepositorys
     {
         Job Add(Job job);
         Job Delete(Job id);
+        List<Job> GetAll();
     }
 }

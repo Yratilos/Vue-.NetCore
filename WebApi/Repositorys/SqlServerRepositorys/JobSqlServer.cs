@@ -18,6 +18,11 @@ namespace WebApi.Repositorys.SqlServerRepositorys
         {
             this.db = db;
         }
+        public List<Job> GetAll()
+        {
+            var ds = db.Execute("select * from [dbo].[Job];select * from [dbo].[Job]");
+            return ds.ToEnumerable<Job>().ToList();
+        }
         public Job Add(Job j)
         {
             var job = GetById(j);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using WebApi.Dtos;
 using WebApi.IRepositorys;
 using WebApi.IServices;
@@ -12,6 +13,11 @@ namespace WebApi.Services
         public JobService(IJobRepository jobRepository)
         {
             this.jobRepository = jobRepository;
+        }
+
+        public List<Job> GetAll()
+        {
+            return jobRepository.GetAll();
         }
 
         public Job Log(JobDto j)

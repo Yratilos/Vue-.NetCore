@@ -18,6 +18,11 @@ namespace WebApi.Repositorys.KingBaseRepositorys
         {
             this.db = db;
         }
+        public List<Job> GetAll()
+        {
+            var ds = db.Execute("select * from \"public\".\"Job\";select * from \"public\".\"Job\";");
+            return ds.ToEnumerable<Job>().ToList();
+        }
         public Job Add(Job j)
         {
             var job = GetById(j);
