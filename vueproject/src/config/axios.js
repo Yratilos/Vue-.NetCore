@@ -1,20 +1,20 @@
-import axios from 'axios'
+ï»¿import axios from 'axios'
 
 axios.defaults.baseURL = '/api'
 axios.defaults.timeout = 5000
 
-// Ìí¼ÓÇëÇóÀ¹½ØÆ÷
+// æ·»åŠ è¯·æ±‚æ‹¦æˆªå™¨
 axios.interceptors.request.use(function (config) {
-    // ÔÚ·¢ËÍÇëÇóÖ®Ç°×öĞ©Ê²Ã´
+    // åœ¨å‘é€è¯·æ±‚ä¹‹å‰åšäº›ä»€ä¹ˆ
     return config;
 }, function (error) {
-    // ¶ÔÇëÇó´íÎó×öĞ©Ê²Ã´
+    // å¯¹è¯·æ±‚é”™è¯¯åšäº›ä»€ä¹ˆ
     return Promise.reject(error);
 });
 
-// Ìí¼ÓÏìÓ¦À¹½ØÆ÷
+// æ·»åŠ å“åº”æ‹¦æˆªå™¨
 axios.interceptors.response.use(function (response) {
-    // 2xx ·¶Î§ÄÚµÄ×´Ì¬Âë¶¼»á´¥·¢¸Ãº¯Êı¡£
+    // 2xx èŒƒå›´å†…çš„çŠ¶æ€ç éƒ½ä¼šè§¦å‘è¯¥å‡½æ•°ã€‚
     const code = response.status
     if (code === 200) {
         const res = response.data
@@ -24,8 +24,8 @@ axios.interceptors.response.use(function (response) {
     }
     return Promise.reject(error);
 }, function (error) {
-    // ³¬³ö 2xx ·¶Î§µÄ×´Ì¬Âë¶¼»á´¥·¢¸Ãº¯Êı¡£
-    // ¶ÔÏìÓ¦´íÎó×öµãÊ²Ã´
+    // è¶…å‡º 2xx èŒƒå›´çš„çŠ¶æ€ç éƒ½ä¼šè§¦å‘è¯¥å‡½æ•°ã€‚
+    // å¯¹å“åº”é”™è¯¯åšç‚¹ä»€ä¹ˆ
     return Promise.reject(error);
 });
 
