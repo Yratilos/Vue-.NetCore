@@ -48,30 +48,27 @@
         created() {
             // fetch the data when the view is created and the data is
             // already being observed
+            this.updateUser();
             this.axiosData();
+        },
+        mounted(){
+            console.log(this.user);
         },
         watch: {
             // call again the method if the route changes
             '$route': 'axiosData',
             locale: function (val) {
-                setLanguage(val)
-                this.$i18n.locale = val
-                this.axiosData()
+                setLanguage(val);
+                this.$i18n.locale = val;
+                this.axiosData();
+            }
+        },
+        computed:{
+            user() {
+              return {id:this.$store.state.userInfo.id,name:this.$store.state.userInfo.name};
             }
         },
         methods: {
-            fetchData() {
-                this.post = null;
-                this.loading = true;
-
-                fetch('weatherforecast')
-                    .then(r => r.json())
-                    .then(json => {
-                        this.post = json.data;
-                        this.loading = false;
-                        return;
-                    });
-            },
             axiosData() {
                 const timer = setTimeout(() => {
                     this.post = null;
@@ -85,7 +82,10 @@
                 })
             },
             switchLocale(newLocale) {
-                this.locale = newLocale
+                this.locale = newLocale;
+            },
+            updateUser(){
+                this.$store.commit('userInfo/updateUser',{id:'08d3fa5a-9ae6-ee11-9c29-5a44875600c1',name:'test'});
             }
         },
     });

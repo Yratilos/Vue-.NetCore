@@ -13,7 +13,6 @@
     <TypeScriptConfiguration Remove="dist\**" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\config\" />
     <Folder Include="src\utils\" />
   </ItemGroup>
 </Project>
