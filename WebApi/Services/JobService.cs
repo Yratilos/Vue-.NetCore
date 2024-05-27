@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using WebApi.Dtos;
 using WebApi.IRepositorys;
 using WebApi.IServices;
@@ -32,7 +35,13 @@ namespace WebApi.Services
 
         Job Add(JobDto j, jobLogType type)
         {
-            return jobRepository.Add(new Job() { ID = Guid.NewGuid(), LogType = type.ToString(), Content = j.Content, Model = j.Model });
+            var job = jobRepository.Add(new Job() { ID = Guid.NewGuid(), LogType = type.ToString(), Content = j.Content, Model = j.Model });
+            var lst = jobRepository.GetAll().OrderBy(s => s.CreateTime).ToList();
+            var json = JsonConvert.SerializeObject(lst);
+            StreamWriter writer = new StreamWriter("Job.json");
+            writer.Write(json);
+            writer.Close();
+            return job;
         }
 
     }
