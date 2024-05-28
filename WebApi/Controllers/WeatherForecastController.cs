@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WebApi.Dtos;
 using WebApi.Resources;
+using WebApi.Systems.Extensions;
 
 namespace WebApi.Controllers
 {
@@ -25,15 +26,25 @@ namespace WebApi.Controllers
             }
         }
         WeatherForecastResources resources;
+        CustomCache cache; CustomSession session; Redis redis;
 
-        public WeatherForecastController(IStringLocalizer<WeatherForecastController> localizer)
+        public WeatherForecastController(IStringLocalizer<WeatherForecastController> localizer, CustomCache cache, CustomSession session, Redis redis)
         {
             resources = new WeatherForecastResources(localizer);
+            this.cache = cache;
+            this.session = session;
+            this.redis = redis;
         }
 
         [HttpGet]
         public IEnumerable<WeatherForecastDto> Get()
         {
+            cache["key"] = 1;
+            var n = cache["key"];
+            session["key"] = 2;
+            var m = session["key"];
+            redis["key"] = 3;
+            var q = redis["key"];
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecastDto
             {

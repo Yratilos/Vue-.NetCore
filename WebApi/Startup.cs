@@ -13,7 +13,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using WebApi.IUtils;
 using WebApi.Systems;
 using WebApi.Systems.DataBases;
@@ -126,6 +125,7 @@ namespace WebApi
                 options.ExpirationScanFrequency = TimeSpan.FromSeconds(Configuration["Cache:Timeout"].ToDouble()); // 设置缓存超时时间
             });
             services.AddSingleton<CustomCache>();
+            services.AddSingleton<Redis>();
 
             var assembly = Assembly.GetExecutingAssembly();
 
