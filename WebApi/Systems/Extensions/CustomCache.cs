@@ -7,7 +7,6 @@ namespace WebApi.Systems.Extensions
     {
         private IMemoryCache memoryCache;
         IConfiguration Configuration;
-        object temp;
         public CustomCache(IMemoryCache memoryCache, IConfiguration configuration)
         {
             this.memoryCache = memoryCache;
@@ -30,9 +29,7 @@ namespace WebApi.Systems.Extensions
                 }
                 else
                 {
-                    var data = temp;
-                    temp = null;
-                    return data;
+                    return null;
                 }
             }
             set
@@ -40,10 +37,6 @@ namespace WebApi.Systems.Extensions
                 if (Configuration["Cache:Enabled"].ToBoolean())
                 {
                     memoryCache.Set(key, value);
-                }
-                else
-                {
-                    temp = value;
                 }
             }
         }
