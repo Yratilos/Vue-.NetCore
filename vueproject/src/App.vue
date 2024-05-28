@@ -4,13 +4,17 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-  <header>
-    <!--<img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />-->
+    <header>
+        <!--<img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />-->
 
-    <div class="wrapper">
-      <HelloWorld />
-    </div>
-  </header>
+        <div class="wrapper">
+            <!--<HelloWorld />-->
+            <router-view></router-view>
+        </div>
+        <router-link to="/home">Home</router-link>
+        <button><router-link to="/">HelloWorld</router-link></button>
+        <router-link to="/about">About</router-link>
+    </header>
 
   <main>
     <TheWelcome />

@@ -1,7 +1,7 @@
 import { createI18n } from 'vue-i18n'
 import enLocale from './locales/en.json'
 import zhLocale from './locales/zh.json'
-import { getLanguage } from '../utils/cookieManager'
+import { getLanguage } from '../cookie'
 
 const messages = {
     en: enLocale,

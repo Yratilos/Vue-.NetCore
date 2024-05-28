@@ -35,7 +35,7 @@
 
 <script lang="js">
     import { defineComponent } from 'vue';
-    import { setLanguage } from '../utils/cookieManager'
+    import { setLanguage } from '../config/cookie'
 
     export default defineComponent({
         data() {
@@ -70,16 +70,16 @@
         },
         methods: {
             axiosData() {
-                const timer = setTimeout(() => {
-                    this.post = null;
-                    this.loading = true;
-                }, 500)
+                //const timer = setTimeout(() => {
+                //    this.post = null;
+                //    this.loading = true;
+                //}, 500);
 
-                this.axios.get('weatherforecast').then(data => {
-                    this.post = data;
-                    clearTimeout(timer);
-                    this.loading = false;
-                })
+                //this.axios.get('weatherforecast').then(data => {
+                //    this.post = data;
+                //    clearTimeout(timer);
+                //    this.loading = false;
+                //});
             },
             switchLocale(newLocale) {
                 this.locale = newLocale;

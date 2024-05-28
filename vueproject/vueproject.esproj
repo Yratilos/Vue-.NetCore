@@ -12,7 +12,4 @@
     <None Remove="dist\**" />
     <TypeScriptConfiguration Remove="dist\**" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\utils\" />
-  </ItemGroup>
 </Project>
