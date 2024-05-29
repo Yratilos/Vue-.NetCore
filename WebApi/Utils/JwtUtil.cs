@@ -17,7 +17,7 @@ namespace WebApi.Utils
             Configuration = configuration;
         }
 
-        public string CreateToken(Claim[] claims)
+        public bool CreateToken(Claim[] claims,out string token)
         {
             // 1. 定义需要使用到的Claims
             if (claims is null)
@@ -49,8 +49,16 @@ namespace WebApi.Utils
             );
 
             // 6. 将token变为string
-            var token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-            return "Bearer " + token;
+            try
+            {
+                token = "Bearer " + new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+                return true;
+            }
+            catch (Exception)
+            {
+                token = "Invalid key";
+                return false;
+            }
         }
 
         public bool IsValidToken(string token, out string message)

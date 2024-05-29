@@ -6,6 +6,7 @@ using WebApi.IServices;
 using WebApi.IUtils;
 using WebApi.Models;
 using WebApi.Systems.Extensions;
+using WebApi.Systems.Results;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -37,9 +38,13 @@ namespace WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public string Token()
+        public CustomResponse<string> Token()
         {
-            return jwt.CreateToken(null);
+            if(jwt.CreateToken(null, out string token))
+            {
+                return token;
+            }
+            return Error<string>(token);
         }
 
         // GET: api/<UserController>
