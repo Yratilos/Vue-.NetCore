@@ -24,20 +24,10 @@ namespace WebApi.Repositorys.KingBaseRepositorys
             var user = GetById(u);
             if (user.ID == Guid.Empty && u.ID != Guid.Empty)
             {
-                IDataParameter[] parameters = new KdbndpParameter[]{
-                    new KdbndpParameter("CreateTime",u.CreateTime),
-                    new KdbndpParameter("UpdateTime",u.UpdateTime),
-                    new KdbndpParameter("ID",u.ID),
-                    new KdbndpParameter("Name",u.Name),
-                    new KdbndpParameter("Account",u.Account),
-                    new KdbndpParameter("Password",u.Password)
-                };
-                Hashtable hashtable = new Hashtable()
+                if (db.Add(u))
                 {
-                    {"insert into \"public\".\"User\" (CreateTime,UpdateTime,ID,Name,Account,Password)values(:CreateTime,:UpdateTime,:ID,:Name,:Account,:Password)", parameters}
-                };
-                db.ExecuteTrans(hashtable);
-                return u;
+                    return u;
+                }
             }
             return new User();
         }
@@ -45,11 +35,6 @@ namespace WebApi.Repositorys.KingBaseRepositorys
         public User Delete(Guid id, out bool result)
         {
             var user = GetById(id);
-            if (user.ID == Guid.Empty)
-            {
-                result = false;
-                return user;
-            }
             result = db.Delete(user);
             return user;
         }
