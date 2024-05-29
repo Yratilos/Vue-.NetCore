@@ -1,6 +1,5 @@
 ﻿using Kdbndp;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -28,20 +27,10 @@ namespace WebApi.Repositorys.KingBaseRepositorys
             var job = GetById(j);
             if (job.ID == Guid.Empty && j.ID != Guid.Empty)
             {
-                var dic = j.ToDictionary();
-                List<IDataParameter> parametersList = new List<IDataParameter>();
-                foreach (var v in dic)
+                if (db.Add(j))
                 {
-                    parametersList.Add(new KdbndpParameter(v.Key, v.Value));
+                    return j;
                 }
-                IDataParameter[] parameters = parametersList.ToArray();
-                var sql = $"insert into \"public\".\"Job\" ({string.Join(",", dic.Keys)})values({string.Join(",", dic.Keys.Select(s => $":{s}"))})";
-                Hashtable hashtable = new Hashtable()
-                {
-                    {sql, parameters}
-                };
-                db.ExecuteTrans(hashtable);
-                return j;
             }
             return new Job();
         }

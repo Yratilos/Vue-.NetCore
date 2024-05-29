@@ -50,14 +50,7 @@ namespace WebApi.Repositorys.KingBaseRepositorys
                 result = false;
                 return user;
             }
-            IDataParameter[] parameters = new KdbndpParameter[]{
-                new KdbndpParameter("id",id)
-            };
-            Hashtable hashtable = new Hashtable()
-            {
-                {"delete from \"public\".\"User\" where ID=:id",parameters}
-            };
-            result = db.ExecuteTrans(hashtable);
+            result = db.Delete(user);
             return user;
         }
 

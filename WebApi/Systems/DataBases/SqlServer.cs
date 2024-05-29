@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Reflection;
 
 namespace WebApi.Systems.DataBases
 {
@@ -174,6 +176,52 @@ namespace WebApi.Systems.DataBases
             {
                 hashtable.Add(item, new SqlParameter[] { });
             }
+            return ExecuteTrans(hashtable);
+        }
+
+        public bool Add<T>(T model) where T : class, new()
+        {
+            var dic = new Dictionary<string, object>();
+            PropertyInfo[] properties = typeof(T).GetProperties();
+            foreach (var prop in properties)
+            {
+                object value = prop.GetValue(model);
+                dic.Add(prop.Name, value);
+            }
+            List<IDataParameter> parametersList = new List<IDataParameter>();
+            foreach (var v in dic)
+            {
+                parametersList.Add(new SqlParameter(v.Key, v.Value));
+            }
+            IDataParameter[] parameters = parametersList.ToArray();
+            var sql = $"insert into [dbo].[{typeof(T).Name}] ({string.Join(",", dic.Keys)})values({string.Join(",", dic.Keys.Select(s => $"@{s}"))})";
+            Hashtable hashtable = new Hashtable()
+            {
+                {sql, parameters}
+            };
+            return ExecuteTrans(hashtable);
+        }
+
+        public bool Delete<T>(T model) where T : class, new()
+        {
+            var dic = new Dictionary<string, object>();
+            PropertyInfo[] properties = typeof(T).GetProperties();
+            foreach (var prop in properties)
+            {
+                object value = prop.GetValue(model);
+                dic.Add(prop.Name, value);
+            }
+            List<IDataParameter> parametersList = new List<IDataParameter>();
+            foreach (var v in dic)
+            {
+                parametersList.Add(new SqlParameter(v.Key, v.Value));
+            }
+            IDataParameter[] parameters = parametersList.ToArray();
+            var sql = $"delete from [dbo].[{typeof(T).Name}] where {string.Join(" and ", $"{dic.Keys}=@{dic.Keys}")}";
+            Hashtable hashtable = new Hashtable()
+            {
+                {sql, parameters}
+            };
             return ExecuteTrans(hashtable);
         }
     }
