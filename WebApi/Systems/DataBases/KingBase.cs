@@ -218,7 +218,6 @@ namespace WebApi.Systems.DataBases
             }
             IDataParameter[] parameters = parametersList.ToArray();
             var sql = $"delete from \"public\".\"{typeof(T).Name}\" where {string.Join(" and ", dic.Keys.Select(s => $"{s}=:{s}"))}";
-            var sql1 = $"delete from \"public\".\"{typeof(T).Name}\" where {string.Join(" and ", dic.Select(s => $"{s.Key}='{s.Value}'"))}";
             Hashtable hashtable = new Hashtable()
             {
                 {sql, parameters}
@@ -226,8 +225,9 @@ namespace WebApi.Systems.DataBases
             var t= ExecuteTrans(hashtable);
             if (!t)
             {
+                sql = $"delete from \"public\".\"{typeof(T).Name}\" where {string.Join(" and ", dic.Select(s => $"{s.Key}='{s.Value}'"))}";
                 hashtable.Clear();
-                hashtable.Add(sql1,new IDataParameter[] { });
+                hashtable.Add(sql,new IDataParameter[] { });
                 t = ExecuteTrans(hashtable);
             }
             return t;
