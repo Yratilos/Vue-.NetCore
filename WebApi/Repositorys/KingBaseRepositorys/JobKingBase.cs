@@ -38,8 +38,11 @@ namespace WebApi.Repositorys.KingBaseRepositorys
         public Job Delete(Job job)
         {
             var j = GetById(job);
-            db.Delete(j);
-            return j;
+            if (db.Delete(j))
+            {
+                return j;
+            }
+            return new Job();
         }
 
         Job GetById(Guid id)

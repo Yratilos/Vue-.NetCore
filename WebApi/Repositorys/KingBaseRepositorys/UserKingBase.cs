@@ -36,7 +36,11 @@ namespace WebApi.Repositorys.KingBaseRepositorys
         {
             var user = GetById(id);
             result = db.Delete(user);
-            return user;
+            if (result)
+            {
+                return user;
+            }
+            return new User();
         }
 
         public List<User> GetAll()
