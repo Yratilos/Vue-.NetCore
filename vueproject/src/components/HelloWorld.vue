@@ -36,13 +36,15 @@
 <script lang="js">
     import { defineComponent } from 'vue';
     import { setLanguage } from '../config/cookie'
+    import userInfo from '../config/stores/userInfo'
 
     export default defineComponent({
         data() {
             return {
                 loading: false,
                 post: null,
-                locale:'zh',
+                locale: 'zh',
+                user : userInfo(),
             };
         },
         created() {
@@ -52,7 +54,7 @@
             this.axiosData();
         },
         mounted(){
-            console.log(this.user);
+            console.log(`id:${this.user.id}`);
         },
         watch: {
             // call again the method if the route changes
@@ -63,10 +65,8 @@
                 this.axiosData();
             }
         },
-        computed:{
-            user() {
-              return {id:this.$store.state.userInfo.id,name:this.$store.state.userInfo.name};
-            }
+        computed: {
+
         },
         methods: {
             axiosData() {
@@ -85,7 +85,7 @@
                 this.locale = newLocale;
             },
             updateUser(){
-                this.$store.commit('userInfo/updateUser',{id:'08d3fa5a-9ae6-ee11-9c29-5a44875600c1',name:'test'});
+                this.user.updateUser({ id: '08d3fa5a-9ae6-ee11-9c29-5a44875600c1', name: 'test' })
             }
         },
     });
