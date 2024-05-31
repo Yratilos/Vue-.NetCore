@@ -84,8 +84,10 @@
             switchLocale(newLocale) {
                 this.locale = newLocale;
             },
-            updateUser(){
-                this.user.updateUser({ id: '08d3fa5a-9ae6-ee11-9c29-5a44875600c1', name: 'test' })
+            updateUser() {
+                if (!(this.user.id && this.user.name)) {
+                    this.user.updateUser({ id: '08d3fa5a-9ae6-ee11-9c29-5a44875600c1', name: 'test' })
+                }
             }
         },
     });
