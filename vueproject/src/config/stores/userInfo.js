@@ -1,6 +1,7 @@
 ﻿import { defineStore } from 'pinia'
 const userInfo = defineStore("user",{
     namespaced: true,
+    persist: true,
     state: () => ({
         id: "",
         name: ""
@@ -14,6 +15,6 @@ const userInfo = defineStore("user",{
     },
     getters: {
         // 定义获取state的计算属性
-    }
+    },
 })
 export default userInfo
