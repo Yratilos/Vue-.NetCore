@@ -110,6 +110,7 @@ namespace WebApi
             services.AddSingleton<IJwtUtil, JwtUtil>();
             services.AddSingleton<IWebSocketUtil, WebSocketUtil>();
             services.AddSingleton<ILogger, Logger>();
+            services.AddSingleton<IScreenRecorder, ScreenRecorder>();
 
             services.AddHttpContextAccessor();
             services.AddDistributedMemoryCache(); // 或者使用其他分布式缓存提供程序，如 Redis
