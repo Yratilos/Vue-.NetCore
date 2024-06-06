@@ -13,7 +13,7 @@ namespace WebApi.IUtils
         /// }
         /// </param>
         /// <returns></returns>
-        public bool CreateToken(Claim[] claims,out string token);
+        public bool CreateToken(Claim[] claims, out string token);
         /// <summary>
         /// 验证Token
         /// </summary>

@@ -40,7 +40,7 @@ namespace WebApi.Controllers
         [AllowAnonymous]
         public CustomResponse<string> Token()
         {
-            if(jwt.CreateToken(null, out string token))
+            if (jwt.CreateToken(null, out string token))
             {
                 return token;
             }

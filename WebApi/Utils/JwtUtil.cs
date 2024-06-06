@@ -17,7 +17,7 @@ namespace WebApi.Utils
             Configuration = configuration;
         }
 
-        public bool CreateToken(Claim[] claims,out string token)
+        public bool CreateToken(Claim[] claims, out string token)
         {
             // 1. 定义需要使用到的Claims
             if (claims is null)

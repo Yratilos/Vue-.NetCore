@@ -222,12 +222,12 @@ namespace WebApi.Systems.DataBases
             {
                 {sql, parameters}
             };
-            var t= ExecuteTrans(hashtable);
+            var t = ExecuteTrans(hashtable);
             if (!t)
             {
                 sql = $"delete from \"public\".\"{typeof(T).Name}\" where {string.Join(" and ", dic.Select(s => $"{s.Key}='{s.Value}'"))}";
                 hashtable.Clear();
-                hashtable.Add(sql,new IDataParameter[] { });
+                hashtable.Add(sql, new IDataParameter[] { });
                 t = ExecuteTrans(hashtable);
             }
             return t;
